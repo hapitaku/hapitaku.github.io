@@ -1,0 +1,985 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>○○介護タクシー | やさしい移送サービス</title>
+  <style>
+    :root {
+      --primary:   #7EB8A4;
+      --primary-d: #5A9A87;
+      --accent:    #F4A853;
+      --soft:      #FDF8F2;
+      --text:      #4A4A4A;
+      --light:     #FFFFFF;
+      --muted:     #8E8E8E;
+      --border:    #E0EDE9;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Hiragino Kaku Gothic ProN', 'Meiryo', sans-serif;
+      color: var(--text);
+      background: var(--soft);
+      line-height: 1.8;
+    }
+
+    /* ─── HEADER ─── */
+    header {
+      background: var(--light);
+      padding: 14px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 2px 8px rgba(126,184,164,0.15);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .logo-icon {
+      width: 44px; height: 44px;
+      background: var(--primary);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 22px;
+      flex-shrink: 0;
+    }
+    .logo-text {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--primary-d);
+      letter-spacing: 0.05em;
+    }
+    .logo-sub {
+      font-size: 0.65rem;
+      color: var(--muted);
+      display: block;
+      font-weight: 400;
+    }
+
+    /* Desktop nav */
+    .nav-desktop {
+      display: flex;
+      gap: 20px;
+    }
+    .nav-desktop a {
+      text-decoration: none;
+      color: var(--text);
+      font-size: 0.88rem;
+      font-weight: 500;
+      padding: 6px 0;
+      border-bottom: 2px solid transparent;
+      transition: all 0.2s;
+      white-space: nowrap;
+    }
+    .nav-desktop a:hover { color: var(--primary-d); border-color: var(--primary); }
+
+    /* Hamburger */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 4px;
+      background: none;
+      border: none;
+    }
+    .hamburger span {
+      display: block;
+      width: 26px; height: 2px;
+      background: var(--text);
+      border-radius: 2px;
+      transition: all 0.3s;
+    }
+    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    /* Mobile nav drawer */
+    .nav-mobile {
+      display: none;
+      flex-direction: column;
+      position: fixed;
+      top: 72px; left: 0; right: 0;
+      background: var(--light);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+      z-index: 99;
+      padding: 8px 0 16px;
+    }
+    .nav-mobile.open { display: flex; }
+    .nav-mobile a {
+      text-decoration: none;
+      color: var(--text);
+      font-size: 1rem;
+      font-weight: 500;
+      padding: 14px 24px;
+      border-bottom: 1px solid var(--border);
+      transition: background 0.2s;
+    }
+    .nav-mobile a:last-child { border-bottom: none; }
+    .nav-mobile a:hover { background: var(--soft); }
+
+    /* ─── HERO ─── */
+    .hero {
+      position: relative;
+      height: 560px;
+      overflow: hidden;
+    }
+    .hero-img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      filter: brightness(0.78);
+    }
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(90,154,135,0.55) 0%, rgba(244,168,83,0.25) 100%);
+    }
+    .hero-content {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 24px;
+    }
+    .hero-badge {
+      background: rgba(255,255,255,0.25);
+      color: #fff;
+      font-size: 0.78rem;
+      letter-spacing: 0.15em;
+      padding: 4px 16px;
+      border-radius: 20px;
+      border: 1px solid rgba(255,255,255,0.5);
+      margin-bottom: 18px;
+    }
+    .hero h1 {
+      color: #fff;
+      font-size: 2.6rem;
+      font-weight: 800;
+      line-height: 1.35;
+      text-shadow: 0 2px 12px rgba(0,0,0,0.25);
+      margin-bottom: 14px;
+    }
+    .hero p {
+      color: rgba(255,255,255,0.92);
+      font-size: 1rem;
+      max-width: 540px;
+      margin-bottom: 28px;
+    }
+    .btn-primary {
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      padding: 14px 36px;
+      border-radius: 50px;
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-block;
+      box-shadow: 0 4px 16px rgba(244,168,83,0.45);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(244,168,83,0.5); }
+
+    /* ─── SECTION WRAPPER ─── */
+    .section-wrap { padding: 64px 20px; max-width: 900px; margin: 0 auto; }
+    .full-bg { background: var(--light); }
+    .full-bg-green { background: linear-gradient(180deg, var(--soft) 0%, #EEF7F3 100%); }
+    .full-bg-contact { background: var(--light); }
+    .inner { max-width: 900px; margin: 0 auto; padding: 64px 20px; }
+
+    .section-label {
+      font-size: 0.75rem;
+      letter-spacing: 0.2em;
+      color: var(--primary);
+      font-weight: 700;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+    h2 {
+      font-size: 1.8rem;
+      font-weight: 800;
+      color: #333;
+      margin-bottom: 14px;
+      line-height: 1.4;
+    }
+    h2 span { color: var(--primary-d); }
+    .divider {
+      width: 48px; height: 4px;
+      background: linear-gradient(90deg, var(--primary), var(--accent));
+      border-radius: 2px;
+      margin-bottom: 32px;
+    }
+
+    /* ─── ABOUT ─── */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 36px;
+      align-items: center;
+    }
+    .about-img {
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: 0 12px 40px rgba(126,184,164,0.25);
+    }
+    .about-img img { width: 100%; height: 320px; object-fit: cover; display: block; }
+    .about-text p { color: #555; font-size: 0.97rem; margin-bottom: 14px; }
+    .check-list { list-style: none; margin-top: 16px; }
+    .check-list li {
+      display: flex; align-items: flex-start; gap: 10px;
+      margin-bottom: 10px; font-size: 0.93rem;
+    }
+    .check-list li::before {
+      content: '✓';
+      background: var(--primary);
+      color: #fff;
+      width: 20px; height: 20px;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 11px; font-weight: 700;
+      flex-shrink: 0; margin-top: 3px;
+    }
+
+    /* ─── FEATURES ─── */
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-top: 36px;
+    }
+    .feature-card {
+      background: var(--soft);
+      border-radius: 20px;
+      padding: 28px 20px;
+      text-align: center;
+      border: 1px solid var(--border);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .feature-card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(126,184,164,0.2); }
+    .feature-icon {
+      font-size: 2rem;
+      background: linear-gradient(135deg, var(--primary), var(--primary-d));
+      width: 64px; height: 64px;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 14px;
+    }
+    .feature-card h3 { font-size: 0.95rem; font-weight: 700; color: #333; margin-bottom: 6px; }
+    .feature-card p { font-size: 0.85rem; color: #666; line-height: 1.7; }
+
+    /* ─── FLOW ─── */
+    .flow-steps { margin-top: 36px; }
+    .flow-step {
+      display: flex; gap: 20px; align-items: flex-start;
+      margin-bottom: 24px;
+      background: var(--light);
+      border-radius: 18px;
+      padding: 24px;
+      border: 1px solid var(--border);
+    }
+    .step-num {
+      background: linear-gradient(135deg, var(--primary), var(--primary-d));
+      color: #fff;
+      width: 44px; height: 44px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.1rem; font-weight: 800; flex-shrink: 0;
+    }
+    .step-body h3 { font-size: 0.97rem; font-weight: 700; margin-bottom: 4px; }
+    .step-body p { font-size: 0.88rem; color: #666; }
+
+    /* ─── GALLERY ─── */
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: 200px 200px;
+      gap: 14px;
+      margin-top: 36px;
+    }
+    .gallery-item { border-radius: 14px; overflow: hidden; box-shadow: 0 4px 16px rgba(0,0,0,0.1); }
+    .gallery-item.large { grid-column: span 2; }
+    .gallery-item img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.4s; }
+    .gallery-item:hover img { transform: scale(1.05); }
+
+    /* ─── PRICE ─── */
+    .price-note {
+      background: #FFF9F0;
+      border: 1px solid #F4A853;
+      border-radius: 12px;
+      padding: 14px 18px;
+      font-size: 0.88rem;
+      color: #8a6000;
+      margin-bottom: 28px;
+    }
+    .price-table {
+      width: 100%;
+      border-collapse: collapse;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 4px 20px rgba(126,184,164,0.15);
+    }
+    .price-table thead { background: var(--primary); color: #fff; }
+    .price-table th { padding: 14px 18px; text-align: left; font-size: 0.9rem; font-weight: 600; }
+    .price-table td { padding: 14px 18px; border-bottom: 1px solid var(--border); font-size: 0.9rem; background: var(--light); }
+    .price-table tr:last-child td { border-bottom: none; }
+    .price-table tr:nth-child(even) td { background: #F5FBF8; }
+    .price-tag {
+      display: inline-block;
+      background: var(--soft);
+      border: 1px solid var(--border);
+      color: var(--muted);
+      border-radius: 8px;
+      padding: 3px 14px;
+      font-size: 0.82rem;
+    }
+    /* スマホ用テーブル */
+    .price-table .col-desc { }
+
+    /* ─── PHOTO BREAK ─── */
+    .photo-break {
+      height: 280px;
+      overflow: hidden;
+      position: relative;
+    }
+    .photo-break img {
+      width: 100%; height: 100%; object-fit: cover;
+      filter: brightness(0.72);
+    }
+    .photo-break-text {
+      position: absolute; inset: 0;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      color: #fff; text-align: center;
+      padding: 20px;
+    }
+    .photo-break-text h3 { font-size: 1.6rem; font-weight: 800; margin-bottom: 8px; }
+    .photo-break-text p { font-size: 0.95rem; opacity: 0.9; }
+
+    /* ─── BLOG ─── */
+    .blog-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-top: 36px;
+    }
+    .blog-card {
+      background: var(--light);
+      border-radius: 18px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      transition: transform 0.2s, box-shadow 0.2s;
+      text-decoration: none;
+      color: inherit;
+      display: block;
+    }
+    .blog-card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(126,184,164,0.2); }
+    .blog-card-img { width: 100%; height: 160px; object-fit: cover; display: block; }
+    .blog-card-body { padding: 18px; }
+    .blog-tag {
+      display: inline-block;
+      background: #E8F5F0;
+      color: var(--primary-d);
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 2px 10px;
+      border-radius: 20px;
+      margin-bottom: 8px;
+    }
+    .blog-card-body h3 { font-size: 0.93rem; font-weight: 700; line-height: 1.5; margin-bottom: 6px; color: #333; }
+    .blog-card-body .blog-date { font-size: 0.78rem; color: var(--muted); }
+    .blog-card-body p { font-size: 0.82rem; color: #666; margin-top: 6px; line-height: 1.6; }
+    .blog-more {
+      text-align: center;
+      margin-top: 36px;
+    }
+    .btn-outline {
+      display: inline-block;
+      border: 2px solid var(--primary);
+      color: var(--primary-d);
+      padding: 12px 36px;
+      border-radius: 50px;
+      font-size: 0.95rem;
+      font-weight: 700;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+    .btn-outline:hover { background: var(--primary); color: #fff; }
+
+    /* ─── CONTACT ─── */
+    .contact-card {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-d) 100%);
+      border-radius: 28px;
+      padding: 52px 40px;
+      text-align: center;
+      color: #fff;
+      box-shadow: 0 16px 48px rgba(90,154,135,0.35);
+    }
+    .contact-card h2 { color: #fff; margin-bottom: 8px; }
+    .contact-card > p { opacity: 0.9; margin-bottom: 28px; font-size: 0.95rem; }
+    .contact-info {
+      display: flex;
+      gap: 24px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 28px;
+    }
+    .contact-item {
+      background: rgba(255,255,255,0.18);
+      border-radius: 16px;
+      padding: 18px 28px;
+      backdrop-filter: blur(8px);
+      min-width: 160px;
+    }
+    .contact-item .label { font-size: 0.78rem; opacity: 0.82; margin-bottom: 4px; }
+    .contact-item .value { font-size: 1.25rem; font-weight: 800; letter-spacing: 0.04em; }
+    .btn-white {
+      background: #fff;
+      color: var(--primary-d);
+      border: none;
+      padding: 14px 40px;
+      border-radius: 50px;
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-block;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .btn-white:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.15); }
+
+    /* ─── FOOTER ─── */
+    footer {
+      background: #333;
+      color: rgba(255,255,255,0.72);
+      text-align: center;
+      padding: 32px 20px;
+      font-size: 0.85rem;
+    }
+    footer .footer-logo { color: #fff; font-size: 1rem; font-weight: 700; margin-bottom: 8px; }
+    footer .footer-links {
+      margin: 12px 0;
+      display: flex; gap: 16px;
+      justify-content: center; flex-wrap: wrap;
+    }
+    footer .footer-links a { color: rgba(255,255,255,0.6); text-decoration: none; }
+    footer .footer-links a:hover { color: #fff; }
+
+    /* ═══════════════════════════════
+       RESPONSIVE
+    ═══════════════════════════════ */
+
+    /* Tablet (≤768px) */
+    @media (max-width: 768px) {
+      .nav-desktop { display: none; }
+      .hamburger { display: flex; }
+
+      .hero { height: 460px; }
+      .hero h1 { font-size: 1.9rem; }
+      .hero p { font-size: 0.92rem; }
+
+      .about-grid { grid-template-columns: 1fr; }
+      .about-img img { height: 260px; }
+
+      .features-grid { grid-template-columns: repeat(2, 1fr); }
+
+      .gallery-grid {
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: auto;
+      }
+      .gallery-item { height: 180px; }
+      .gallery-item.large { grid-column: span 2; }
+
+      .blog-grid { grid-template-columns: repeat(2, 1fr); }
+
+      .price-table th, .price-table td { padding: 12px 12px; font-size: 0.85rem; }
+      .col-desc { display: none; } /* 詳細列を隠す */
+
+      .contact-card { padding: 36px 24px; }
+      .contact-item { min-width: 140px; }
+    }
+
+    /* Mobile (≤480px) */
+    @media (max-width: 480px) {
+      .hero { height: 400px; }
+      .hero h1 { font-size: 1.55rem; }
+      .hero p { font-size: 0.85rem; }
+      .btn-primary { padding: 12px 28px; font-size: 0.9rem; }
+
+      .section-wrap, .inner { padding: 48px 16px; }
+
+      h2 { font-size: 1.45rem; }
+
+      .features-grid { grid-template-columns: 1fr; gap: 16px; }
+
+      .gallery-grid {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto;
+      }
+      .gallery-item { height: 200px; }
+      .gallery-item.large { grid-column: span 1; }
+
+      .blog-grid { grid-template-columns: 1fr; }
+
+      .flow-step { flex-direction: column; gap: 12px; }
+
+      .price-table { font-size: 0.82rem; }
+      .price-table th, .price-table td { padding: 10px 10px; }
+
+      .photo-break { height: 220px; }
+      .photo-break-text h3 { font-size: 1.2rem; }
+
+      .contact-card { padding: 28px 16px; }
+      .contact-info { flex-direction: column; align-items: center; }
+      .contact-item { width: 100%; }
+
+      footer .footer-links { gap: 12px; font-size: 0.8rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="logo">
+    <div class="logo-icon">🚐</div>
+    <div>
+      <div class="logo-text">○○介護タクシー</div>
+      <span class="logo-sub">やさしい移送サービス</span>
+    </div>
+  </div>
+  <nav class="nav-desktop">
+    <a href="#about">サービス概要</a>
+    <a href="#features">特長</a>
+    <a href="#flow">ご利用の流れ</a>
+    <a href="#price">料金表</a>
+    <a href="#blog">ブログ</a>
+    <a href="#contact">お問い合わせ</a>
+  </nav>
+  <button class="hamburger" id="hamburger" aria-label="メニュー">
+    <span></span><span></span><span></span>
+  </button>
+</header>
+
+<!-- MOBILE NAV -->
+<nav class="nav-mobile" id="nav-mobile">
+  <a href="#about" onclick="closeMenu()">サービス概要</a>
+  <a href="#features" onclick="closeMenu()">特長</a>
+  <a href="#flow" onclick="closeMenu()">ご利用の流れ</a>
+  <a href="#price" onclick="closeMenu()">料金表</a>
+  <a href="#blog" onclick="closeMenu()">ブログ</a>
+  <a href="#contact" onclick="closeMenu()">お問い合わせ</a>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <img class="hero-img"
+    src="https://images.unsplash.com/photo-1576765608535-5f04d1e3f289?w=1600&q=80"
+    alt="やさしい介護タクシー">
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <div class="hero-badge">○○市・○○地区 対応</div>
+    <h1>あなたの「行きたい」を<br>全力でサポートします</h1>
+    <p>車いすや寝台のまま乗車OK。通院・外出・冠婚葬祭まで、介護タクシー○○がお手伝いします。</p>
+    <a href="#contact" class="btn-primary">📞 今すぐ予約・相談する</a>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section id="about" class="section-wrap">
+  <div class="section-label">About</div>
+  <h2>介護タクシーとは<br><span>どんなサービス？</span></h2>
+  <div class="divider"></div>
+  <div class="about-grid">
+    <div class="about-img">
+      <img src="https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=800&q=80"
+           alt="介護サービスイメージ">
+    </div>
+    <div class="about-text">
+      <p>介護タクシーとは、要介護者・障がいをお持ちの方など、一般の交通機関の利用が難しい方を対象とした移送サービスです。</p>
+      <p>乗降時の介助から目的地への移動まで、有資格の乗務員がトータルでサポートします。病院への通院だけでなく、買い物・観光・冠婚葬祭など幅広いシーンでご利用いただけます。</p>
+      <ul class="check-list">
+        <li>車いすのまま乗車できる福祉車両を完備</li>
+        <li>寝台（ストレッチャー）対応も可能</li>
+        <li>介護職員初任者研修修了のスタッフが対応</li>
+        <li>通院・外出・旅行・冠婚葬祭など幅広く対応</li>
+        <li>介護保険・自費どちらにも対応</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<div class="full-bg" id="features">
+  <div class="inner">
+    <div class="section-label">Features</div>
+    <h2>○○介護タクシーの<br><span>6つの特長</span></h2>
+    <div class="divider"></div>
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon">🏥</div>
+        <h3>有資格スタッフが対応</h3>
+        <p>介護職員初任者研修をはじめ、各種資格を持つスタッフが丁寧にサポートします。</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🚐</div>
+        <h3>充実した車両ラインナップ</h3>
+        <p>車いす対応車・寝台対応車など、お体の状態に合わせた車両をご用意しています。</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">📅</div>
+        <h3>予約は前日までOK</h3>
+        <p>お電話・メールで前日までご予約ください。定期利用の方には優先対応いたします。</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🛡️</div>
+        <h3>安心の損害保険加入</h3>
+        <p>万が一の際も安心できるよう、充分な損害保険に加入しています。</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">💚</div>
+        <h3>介護保険・自費どちらも対応</h3>
+        <p>介護保険での利用はもちろん、保険外の自費サービスにも幅広く対応しています。</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🌸</div>
+        <h3>通院以外のお出かけも歓迎</h3>
+        <p>お花見・温泉・帰省など、さまざまな「行きたい」にお応えします。</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FLOW -->
+<section id="flow" class="section-wrap">
+  <div class="section-label">Flow</div>
+  <h2>ご利用の<span>流れ</span></h2>
+  <div class="divider"></div>
+  <div class="flow-steps">
+    <div class="flow-step">
+      <div class="step-num">1</div>
+      <div class="step-body">
+        <h3>お電話・メールでご相談・ご予約</h3>
+        <p>ご利用日時、乗降場所、お体の状況（車いす・寝台など）をお知らせください。初めての方もお気軽にどうぞ。</p>
+      </div>
+    </div>
+    <div class="flow-step">
+      <div class="step-num">2</div>
+      <div class="step-body">
+        <h3>内容の確認・見積もりご案内</h3>
+        <p>ご要望を確認の上、料金の目安をご案内します。介護保険適用の場合はケアマネジャーとの連携も承ります。</p>
+      </div>
+    </div>
+    <div class="flow-step">
+      <div class="step-num">3</div>
+      <div class="step-body">
+        <h3>当日：スタッフがお迎えに伺います</h3>
+        <p>ご自宅・施設等へスタッフがお迎えに参ります。乗降の介助も丁寧に対応いたします。</p>
+      </div>
+    </div>
+    <div class="flow-step">
+      <div class="step-num">4</div>
+      <div class="step-body">
+        <h3>目的地へご移動・ご帰宅まで安心</h3>
+        <p>目的地でのお待ち時間も対応可能です。ご帰宅まで一貫してサポートいたします。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<div class="full-bg-green">
+  <div class="inner">
+    <div class="section-label">Gallery</div>
+    <h2>サービスの<span>様子</span></h2>
+    <div class="divider"></div>
+    <div class="gallery-grid">
+      <div class="gallery-item large">
+        <img src="https://images.unsplash.com/photo-1584515933487-779824d29309?w=900&q=80"
+             alt="介護車両イメージ">
+      </div>
+      <div class="gallery-item">
+        <img src="https://images.unsplash.com/photo-1559757175-0eb30cd8c063?w=600&q=80"
+             alt="スタッフ対応イメージ">
+      </div>
+      <div class="gallery-item">
+        <img src="https://images.unsplash.com/photo-1576765608535-5f04d1e3f289?w=600&q=80"
+             alt="病院送迎イメージ">
+      </div>
+      <div class="gallery-item">
+        <img src="https://images.unsplash.com/photo-1531746790731-6c087fecd65a?w=600&q=80"
+             alt="安心サポートイメージ">
+      </div>
+      <div class="gallery-item large">
+        <img src="https://images.unsplash.com/photo-1544027993-37dbfe43562a?w=900&q=80"
+             alt="やさしいサービスイメージ">
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PHOTO BREAK -->
+<div class="photo-break">
+  <img src="https://images.unsplash.com/photo-1469571486292-0ba58a3f068b?w=1600&q=80"
+       alt="外出のよろこび">
+  <div class="photo-break-text">
+    <h3>「また外に出たい」という気持ちを大切に</h3>
+    <p>あなたのペースで、行きたい場所へ。○○介護タクシーがそばにいます。</p>
+  </div>
+</div>
+
+<!-- PRICE -->
+<section id="price" class="section-wrap">
+  <div class="section-label">Price</div>
+  <h2>料金表</h2>
+  <div class="divider"></div>
+  <div class="price-note">
+    ⚠️ 料金は距離・時間・サービス内容により異なります。詳しくはお電話にてご確認ください。介護保険が適用できる場合があります。
+  </div>
+  <table class="price-table">
+    <thead>
+      <tr>
+        <th>サービス項目</th>
+        <th class="col-desc">内容</th>
+        <th>料金</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>基本料金（乗車料）</strong></td>
+        <td class="col-desc">初乗り〜距離に応じた料金</td>
+        <td><span class="price-tag">要お問い合わせ</span></td>
+      </tr>
+      <tr>
+        <td><strong>介助料（乗降介助）</strong></td>
+        <td class="col-desc">乗降時の介助・移乗サービス</td>
+        <td><span class="price-tag">要お問い合わせ</span></td>
+      </tr>
+      <tr>
+        <td><strong>車いす使用加算</strong></td>
+        <td class="col-desc">車いすのまま乗車する場合</td>
+        <td><span class="price-tag">要お問い合わせ</span></td>
+      </tr>
+      <tr>
+        <td><strong>寝台加算</strong></td>
+        <td class="col-desc">寝台対応車両を使用する場合</td>
+        <td><span class="price-tag">要お問い合わせ</span></td>
+      </tr>
+      <tr>
+        <td><strong>待機料金</strong></td>
+        <td class="col-desc">病院・施設でのお待ち時間</td>
+        <td><span class="price-tag">要お問い合わせ</span></td>
+      </tr>
+      <tr>
+        <td><strong>早朝・深夜割増</strong></td>
+        <td class="col-desc">22:00〜翌5:00のご利用</td>
+        <td><span class="price-tag">要お問い合わせ</span></td>
+      </tr>
+      <tr>
+        <td><strong>介護保険適用サービス</strong></td>
+        <td class="col-desc">通院等乗降介助（要件を満たす場合）</td>
+        <td><span class="price-tag">要お問い合わせ</span></td>
+      </tr>
+      <tr>
+        <td><strong>自費サービス</strong></td>
+        <td class="col-desc">買い物・観光・冠婚葬祭等の外出支援</td>
+        <td><span class="price-tag">要お問い合わせ</span></td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- BLOG -->
+<div class="full-bg" id="blog">
+  <div class="inner">
+    <div class="section-label">Blog</div>
+    <h2>お役立ち<span>情報・ブログ</span></h2>
+    <div class="divider"></div>
+    <div class="blog-grid">
+      <a class="blog-card" href="#">
+        <img class="blog-card-img"
+          src="https://images.unsplash.com/photo-1576765608535-5f04d1e3f289?w=600&q=80"
+          alt="ブログ記事1">
+        <div class="blog-card-body">
+          <span class="blog-tag">介護タクシーとは</span>
+          <div class="blog-date">2024年11月10日</div>
+          <h3>介護タクシーと一般タクシーの違いとは？わかりやすく解説</h3>
+          <p>介護タクシーは一般タクシーと何が違うのか、料金・資格・サービス内容を比較してご紹介します。</p>
+        </div>
+      </a>
+      <a class="blog-card" href="#">
+        <img class="blog-card-img"
+          src="https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=600&q=80"
+          alt="ブログ記事2">
+        <div class="blog-card-body">
+          <span class="blog-tag">介護保険</span>
+          <div class="blog-date">2024年10月25日</div>
+          <h3>介護保険で使える移送サービス｜通院等乗降介助とは</h3>
+          <p>介護保険を使って介護タクシーを利用するための条件・手続きをわかりやすく解説します。</p>
+        </div>
+      </a>
+      <a class="blog-card" href="#">
+        <img class="blog-card-img"
+          src="https://images.unsplash.com/photo-1531746790731-6c087fecd65a?w=600&q=80"
+          alt="ブログ記事3">
+        <div class="blog-card-body">
+          <span class="blog-tag">お出かけ</span>
+          <div class="blog-date">2024年10月5日</div>
+          <h3>車いすでお花見へ！介護タクシーで楽しむ春のおでかけ</h3>
+          <p>通院だけじゃもったいない。介護タクシーを使った季節のお出かけ事例をご紹介します。</p>
+        </div>
+      </a>
+      <a class="blog-card" href="#">
+        <img class="blog-card-img"
+          src="https://images.unsplash.com/photo-1544027993-37dbfe43562a?w=600&q=80"
+          alt="ブログ記事4">
+        <div class="blog-card-body">
+          <span class="blog-tag">ご利用ガイド</span>
+          <div class="blog-date">2024年9月18日</div>
+          <h3>はじめて介護タクシーを利用する方へ｜当日の流れと持ち物</h3>
+          <p>初めてのご利用でも安心。予約から乗車・目的地到着まで、当日の流れを詳しく解説します。</p>
+        </div>
+      </a>
+      <a class="blog-card" href="#">
+        <img class="blog-card-img"
+          src="https://images.unsplash.com/photo-1584515933487-779824d29309?w=600&q=80"
+          alt="ブログ記事5">
+        <div class="blog-card-body">
+          <span class="blog-tag">車両紹介</span>
+          <div class="blog-date">2024年9月1日</div>
+          <h3>福祉車両の種類と選び方｜車いす対応・寝台対応を徹底比較</h3>
+          <p>お体の状態や用途に合わせた福祉車両の選び方をご説明します。</p>
+        </div>
+      </a>
+      <a class="blog-card" href="#">
+        <img class="blog-card-img"
+          src="https://images.unsplash.com/photo-1559757175-0eb30cd8c063?w=600&q=80"
+          alt="ブログ記事6">
+        <div class="blog-card-body">
+          <span class="blog-tag">スタッフ紹介</span>
+          <div class="blog-date">2024年8月15日</div>
+          <h3>安心してお任せください｜スタッフの資格・研修について</h3>
+          <p>○○介護タクシーのスタッフが持つ資格や日々の研修内容をご紹介します。</p>
+        </div>
+      </a>
+    </div>
+    <div class="blog-more">
+      <a href="#" class="btn-outline">ブログ記事をもっと見る →</a>
+    </div>
+  </div>
+</div>
+
+<!-- CONTACT -->
+<div class="full-bg-contact" id="contact">
+  <div class="inner">
+    <div class="section-label">Contact</div>
+    <h2>お問い合わせ・<span>ご予約</span></h2>
+    <div class="divider"></div>
+    <div class="contact-card">
+      <h2>お気軽にご連絡ください</h2>
+      <p>予約・相談・見積もり、どんなことでもお電話・メールにてお受けします。</p>
+      <div class="contact-info">
+        <div class="contact-item">
+          <div class="label">📞 電話番号</div>
+          <div class="value">○○-○○○○-○○○○</div>
+        </div>
+        <div class="contact-item">
+          <div class="label">⏰ 受付時間</div>
+          <div class="value">○:○○〜○○:○○</div>
+        </div>
+        <div class="contact-item">
+          <div class="label">📧 メール</div>
+          <div class="value">○○○@○○○.jp</div>
+        </div>
+      </div>
+      <a href="tel:00-0000-0000" class="btn-white">📞 今すぐ電話する</a>
+    </div>
+  </div>
+</div>
+
+<!-- QR CODE -->
+<div style="background:#F5FBF8; padding:56px 20px; text-align:center; border-top:1px solid var(--border);">
+  <div class="section-label" style="margin-bottom:6px;">QR Code</div>
+  <h2 style="font-size:1.5rem; margin-bottom:12px;">サイトURLをスマホで開く</h2>
+  <div class="divider" style="margin:0 auto 24px;"></div>
+  <p style="font-size:0.88rem; color:#666; margin-bottom:24px;">
+    スマートフォンのカメラでQRコードを読み取るとこのサイトにアクセスできます。
+  </p>
+  <div id="qrcode" style="display:inline-block; padding:16px; background:#fff; border-radius:16px; box-shadow:0 4px 20px rgba(126,184,164,0.2);"></div>
+  <p id="qr-url" style="margin-top:14px; font-size:0.82rem; color:var(--muted); letter-spacing:0.03em;"></p>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">🚐 ○○介護タクシー</div>
+  <div>〒○○○-○○○○　○○県○○市○○町○-○-○</div>
+  <div class="footer-links">
+    <a href="#about">サービス概要</a>
+    <a href="#features">特長</a>
+    <a href="#flow">ご利用の流れ</a>
+    <a href="#price">料金表</a>
+    <a href="#blog">ブログ</a>
+    <a href="#contact">お問い合わせ</a>
+    <a href="#">プライバシーポリシー</a>
+  </div>
+  <div style="margin-top:16px; font-size:0.78rem; opacity:0.45;">
+    © 2024 ○○介護タクシー. All rights reserved.
+  </div>
+</footer>
+
+<script>
+  // QRコード生成
+  (function() {
+    const script = document.createElement('script');
+    script.src = 'https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js';
+    script.onload = function() {
+      const url = window.location.href.split('#')[0];
+      document.getElementById('qr-url').textContent = url;
+      new QRCode(document.getElementById('qrcode'), {
+        text: url,
+        width: 180,
+        height: 180,
+        colorDark: '#5A9A87',
+        colorLight: '#ffffff',
+        correctLevel: QRCode.CorrectLevel.M
+      });
+    };
+    document.head.appendChild(script);
+  })();
+
+  const hamburger = document.getElementById('hamburger');
+  const navMobile = document.getElementById('nav-mobile');
+
+  hamburger.addEventListener('click', () => {
+    hamburger.classList.toggle('open');
+    navMobile.classList.toggle('open');
+  });
+
+  function closeMenu() {
+    hamburger.classList.remove('open');
+    navMobile.classList.remove('open');
+  }
+
+  // スムーズスクロール
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) {
+        e.preventDefault();
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+  });
+</script>
+
+</body>
+</html>
