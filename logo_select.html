@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>はぴタク ロゴ案一覧</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Hiragino Kaku Gothic ProN', 'Meiryo', sans-serif;
+    background: #F0F7E6;
+    padding: 32px 24px;
+    width: 900px;
+  }
+  .title {
+    text-align: center;
+    font-size: 18px;
+    font-weight: 700;
+    color: #4A8A22;
+    margin-bottom: 8px;
+    letter-spacing: 0.05em;
+  }
+  .subtitle {
+    text-align: center;
+    font-size: 12px;
+    color: #888;
+    margin-bottom: 28px;
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+  .card {
+    background: white;
+    border-radius: 16px;
+    padding: 28px 24px 20px;
+    border: 2px solid #C8E6A0;
+    position: relative;
+  }
+  .card-label {
+    position: absolute;
+    top: 14px;
+    right: 16px;
+    background: #6DB33F;
+    color: white;
+    font-size: 12px;
+    font-weight: 700;
+    padding: 3px 12px;
+    border-radius: 20px;
+    letter-spacing: 0.05em;
+  }
+  .card-desc {
+    font-size: 11px;
+    color: #888;
+    margin-bottom: 16px;
+    font-weight: 400;
+  }
+  .logo-wrap {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 16px;
+    border-radius: 10px;
+    margin-bottom: 12px;
+  }
+  .logo-wrap.green  { background: #F0F7E6; }
+  .logo-wrap.dark   { background: #2D4A1A; }
+  .logo-wrap.orange { background: #FFF8EC; }
+  .logo-wrap.white  { background: white; border: 1.5px solid #C8E6A0; }
+
+  /* --- icon --- */
+  .icon-circle {
+    width: 64px; height: 64px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; position: relative;
+  }
+  .icon-circle.green-bg  { background: #6DB33F; }
+  .icon-circle.dark-bg   { background: #4A8A22; }
+  .icon-circle.orange-bg { background: #F5A623; }
+  .van {
+    width: 42px; height: auto;
+  }
+  .heart-badge {
+    position: absolute;
+    top: 4px; right: 4px;
+    width: 18px; height: 18px;
+    background: #F5A623;
+    border-radius: 50%;
+    font-size: 10px;
+    display: flex; align-items: center; justify-content: center;
+    color: white; font-weight: 700;
+  }
+  .orange-bg .heart-badge { background: #4A8A22; }
+
+  /* --- text --- */
+  .logo-text-wrap {}
+  .logo-name {
+    font-size: 32px;
+    font-weight: 900;
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+  .logo-name.outline-white {
+    color: #4A8A22;
+    -webkit-text-stroke: 3px white;
+    paint-order: stroke fill;
+  }
+  .logo-name.outline-white-on-dark {
+    color: white;
+    -webkit-text-stroke: 3px #2D4A1A;
+    paint-order: stroke fill;
+  }
+  .logo-name.outline-orange {
+    color: #2D4A1A;
+    -webkit-text-stroke: 3px #F5A623;
+    paint-order: stroke fill;
+  }
+  .logo-name.no-outline-green { color: #4A8A22; }
+  .logo-sub1 {
+    font-size: 12px;
+    font-weight: 700;
+    margin-bottom: 2px;
+  }
+  .logo-sub2 { font-size: 10px; color: #888; margin-bottom: 2px; }
+  .logo-phone { font-size: 11px; font-weight: 700; }
+
+  .green  .logo-sub1  { color: #6DB33F; }
+  .green  .logo-phone { color: #F5A623; }
+  .dark   .logo-sub1  { color: #9FE1CB; }
+  .dark   .logo-sub2  { color: rgba(255,255,255,0.6); }
+  .dark   .logo-phone { color: #F5A623; }
+  .orange .logo-sub1  { color: #4A8A22; }
+  .orange .logo-phone { color: #F5A623; }
+  .white  .logo-sub1  { color: #6DB33F; }
+  .white  .logo-phone { color: #F5A623; }
+
+  .note {
+    font-size: 10px;
+    color: #aaa;
+    margin-top: 6px;
+    text-align: right;
+  }
+
+  /* wide card */
+  .card.wide {
+    grid-column: 1 / -1;
+  }
+  .wide .logo-wrap {
+    padding: 20px 28px;
+    align-items: center;
+    gap: 20px;
+  }
+  .wide .logo-name {
+    font-size: 42px;
+  }
+  .wide .icon-circle {
+    width: 80px; height: 80px;
+  }
+  .wide .van { width: 54px; }
+  .wide .heart-badge { width: 22px; height: 22px; font-size: 12px; top: 5px; right: 5px; }
+  .wide .logo-sub1 { font-size: 14px; }
+  .wide .logo-sub2 { font-size: 11px; }
+  .wide .logo-phone { font-size: 13px; }
+  .right-block {
+    margin-left: auto;
+    text-align: right;
+  }
+  .phone-big {
+    font-size: 22px;
+    font-weight: 900;
+    color: #F5A623;
+  }
+  .hours {
+    font-size: 10px;
+    color: #888;
+    margin-top: 2px;
+  }
+
+  /* favicon row */
+  .favicon-row {
+    grid-column: 1 / -1;
+    display: flex;
+    gap: 16px;
+    align-items: stretch;
+  }
+  .favicon-card {
+    background: white;
+    border-radius: 14px;
+    padding: 16px;
+    border: 2px solid #C8E6A0;
+    flex: 1;
+    text-align: center;
+  }
+  .favicon-preview {
+    width: 64px; height: 64px;
+    border-radius: 10px;
+    display: inline-flex;
+    align-items: center; justify-content: center;
+    margin-bottom: 10px;
+    font-size: 34px;
+    font-weight: 900;
+    color: white;
+  }
+  .favicon-name {
+    font-size: 11px;
+    font-weight: 700;
+    color: #4A8A22;
+    margin-bottom: 3px;
+  }
+  .favicon-desc {
+    font-size: 10px;
+    color: #888;
+  }
+  .fav-label {
+    display: inline-block;
+    background: #6DB33F;
+    color: white;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 2px 10px;
+    border-radius: 20px;
+    margin-bottom: 8px;
+  }
+  .section-header {
+    grid-column: 1 / -1;
+    font-size: 13px;
+    font-weight: 700;
+    color: #4A8A22;
+    border-bottom: 2px solid #C8E6A0;
+    padding-bottom: 6px;
+    margin-top: 4px;
+    letter-spacing: 0.08em;
+  }
+</style>
+</head>
+<body>
+
+<div class="title">はぴタク　ロゴ・ファビコン案一覧</div>
+<div class="subtitle">お好みの案番号をお知らせください / 複数組み合わせも可能です</div>
+
+<div class="grid">
+
+  <!-- Section header -->
+  <div class="section-header">▼ ロゴ案（縁取り文字・明確な車両アイコン）</div>
+
+  <!-- LOGO A -->
+  <div class="card">
+    <div class="card-label">A</div>
+    <div class="card-desc">グリーン背景・白縁取り　汎用スタンダード</div>
+    <div class="logo-wrap green">
+      <div class="icon-circle green-bg">
+        <svg viewBox="0 0 60 42" class="van">
+          <!-- Van body -->
+          <rect x="2" y="20" width="56" height="18" rx="3" fill="white"/>
+          <!-- Roof -->
+          <polygon points="6,20 10,8 42,8 56,20" fill="white"/>
+          <!-- Windshield -->
+          <polygon points="12,20 15,10 40,10 44,20" fill="#6DB33F" opacity="0.55"/>
+          <!-- Side window -->
+          <rect x="44" y="11" width="10" height="7" rx="1" fill="#6DB33F" opacity="0.55"/>
+          <!-- Wheels -->
+          <circle cx="14" cy="38" r="6" fill="#4A8A22" stroke="white" stroke-width="2"/>
+          <circle cx="14" cy="38" r="2.5" fill="white"/>
+          <circle cx="46" cy="38" r="6" fill="#4A8A22" stroke="white" stroke-width="2"/>
+          <circle cx="46" cy="38" r="2.5" fill="white"/>
+          <!-- Wheelchair symbol -->
+          <circle cx="28" cy="14" r="2.5" fill="#F5A623"/>
+          <line x1="28" y1="17" x2="28" y2="24" stroke="#F5A623" stroke-width="1.8"/>
+          <line x1="28" y1="20" x2="34" y2="20" stroke="#F5A623" stroke-width="1.8"/>
+        </svg>
+        <div class="heart-badge">♥</div>
+      </div>
+      <div class="logo-text-wrap">
+        <div class="logo-name outline-white">はぴタク</div>
+        <div class="logo-sub1">介護福祉タクシー</div>
+        <div class="logo-sub2">救急救命士による安全・安心な移送サービス</div>
+        <div class="logo-phone">☎ 090-3603-4400</div>
+      </div>
+    </div>
+    <div class="note">ヘッダー・名刺・チラシ向き</div>
+  </div>
+
+  <!-- LOGO B -->
+  <div class="card">
+    <div class="card-label">B</div>
+    <div class="card-desc">ダーク背景・白縁取り　夜間・看板対応</div>
+    <div class="logo-wrap dark">
+      <div class="icon-circle dark-bg">
+        <svg viewBox="0 0 60 42" class="van">
+          <rect x="2" y="20" width="56" height="18" rx="3" fill="white"/>
+          <polygon points="6,20 10,8 42,8 56,20" fill="white"/>
+          <polygon points="12,20 15,10 40,10 44,20" fill="#4A8A22" opacity="0.6"/>
+          <rect x="44" y="11" width="10" height="7" rx="1" fill="#4A8A22" opacity="0.6"/>
+          <circle cx="14" cy="38" r="6" fill="#2D4A1A" stroke="white" stroke-width="2"/>
+          <circle cx="14" cy="38" r="2.5" fill="white"/>
+          <circle cx="46" cy="38" r="6" fill="#2D4A1A" stroke="white" stroke-width="2"/>
+          <circle cx="46" cy="38" r="2.5" fill="white"/>
+          <circle cx="28" cy="14" r="2.5" fill="#F5A623"/>
+          <line x1="28" y1="17" x2="28" y2="24" stroke="#F5A623" stroke-width="1.8"/>
+          <line x1="28" y1="20" x2="34" y2="20" stroke="#F5A623" stroke-width="1.8"/>
+        </svg>
+        <div class="heart-badge">♥</div>
+      </div>
+      <div class="logo-text-wrap">
+        <div class="logo-name outline-white-on-dark">はぴタク</div>
+        <div class="logo-sub1">介護福祉タクシー</div>
+        <div class="logo-sub2">救急救命士による安全・安心な移送サービス</div>
+        <div class="logo-phone">☎ 090-3603-4400</div>
+      </div>
+    </div>
+    <div class="note">夜間・暗い背景・SNSプロフィール向き</div>
+  </div>
+
+  <!-- LOGO C -->
+  <div class="card">
+    <div class="card-label">C</div>
+    <div class="card-desc">オレンジ縁取り　インパクト重視</div>
+    <div class="logo-wrap orange">
+      <div class="icon-circle orange-bg">
+        <svg viewBox="0 0 60 42" class="van">
+          <rect x="2" y="20" width="56" height="18" rx="3" fill="white"/>
+          <polygon points="6,20 10,8 42,8 56,20" fill="white"/>
+          <polygon points="12,20 15,10 40,10 44,20" fill="#E8920A" opacity="0.5"/>
+          <rect x="44" y="11" width="10" height="7" rx="1" fill="#E8920A" opacity="0.5"/>
+          <circle cx="14" cy="38" r="6" fill="#C47A05" stroke="white" stroke-width="2"/>
+          <circle cx="14" cy="38" r="2.5" fill="white"/>
+          <circle cx="46" cy="38" r="6" fill="#C47A05" stroke="white" stroke-width="2"/>
+          <circle cx="46" cy="38" r="2.5" fill="white"/>
+          <circle cx="28" cy="14" r="2.5" fill="#4A8A22"/>
+          <line x1="28" y1="17" x2="28" y2="24" stroke="#4A8A22" stroke-width="1.8"/>
+          <line x1="28" y1="20" x2="34" y2="20" stroke="#4A8A22" stroke-width="1.8"/>
+        </svg>
+        <div class="heart-badge" style="background:#4A8A22;">♥</div>
+      </div>
+      <div class="logo-text-wrap">
+        <div class="logo-name outline-orange">はぴタク</div>
+        <div class="logo-sub1">介護福祉タクシー</div>
+        <div class="logo-sub2">救急救命士による安全・安心な移送サービス</div>
+        <div class="logo-phone">☎ 090-3603-4400</div>
+      </div>
+    </div>
+    <div class="note">チラシ・ポスター向き／最も目立つ</div>
+  </div>
+
+  <!-- LOGO D: Wide banner -->
+  <div class="card">
+    <div class="card-label">D</div>
+    <div class="card-desc">白背景・緑文字　シンプル清潔感</div>
+    <div class="logo-wrap white">
+      <div class="icon-circle green-bg">
+        <svg viewBox="0 0 60 42" class="van">
+          <rect x="2" y="20" width="56" height="18" rx="3" fill="white"/>
+          <polygon points="6,20 10,8 42,8 56,20" fill="white"/>
+          <polygon points="12,20 15,10 40,10 44,20" fill="#6DB33F" opacity="0.55"/>
+          <rect x="44" y="11" width="10" height="7" rx="1" fill="#6DB33F" opacity="0.55"/>
+          <circle cx="14" cy="38" r="6" fill="#4A8A22" stroke="white" stroke-width="2"/>
+          <circle cx="14" cy="38" r="2.5" fill="white"/>
+          <circle cx="46" cy="38" r="6" fill="#4A8A22" stroke="white" stroke-width="2"/>
+          <circle cx="46" cy="38" r="2.5" fill="white"/>
+          <circle cx="28" cy="14" r="2.5" fill="#F5A623"/>
+          <line x1="28" y1="17" x2="28" y2="24" stroke="#F5A623" stroke-width="1.8"/>
+          <line x1="28" y1="20" x2="34" y2="20" stroke="#F5A623" stroke-width="1.8"/>
+        </svg>
+        <div class="heart-badge">♥</div>
+      </div>
+      <div class="logo-text-wrap">
+        <div class="logo-name no-outline-green">はぴタク</div>
+        <div class="logo-sub1">介護福祉タクシー</div>
+        <div class="logo-sub2">救急救命士による安全・安心な移送サービス</div>
+        <div class="logo-phone">☎ 090-3603-4400</div>
+      </div>
+    </div>
+    <div class="note">病院掲示・書類・印刷物向き</div>
+  </div>
+
+  <!-- Favicon section -->
+  <div class="section-header">▼ ファビコン案（ブラウザタブ表示用）</div>
+  <div class="favicon-row">
+    <div class="favicon-card">
+      <div class="fav-label">A</div>
+      <div class="favicon-preview" style="background:#6DB33F; font-size:36px;">は</div>
+      <div class="favicon-name">「は」シンプル</div>
+      <div class="favicon-desc">緑丸に白文字<br>最も視認性◎</div>
+    </div>
+    <div class="favicon-card">
+      <div class="fav-label">B</div>
+      <div style="width:64px;height:64px;background:#4A8A22;border-radius:10px;margin:0 auto 10px;position:relative;display:flex;align-items:center;justify-content:center;">
+        <svg viewBox="0 0 60 52" width="52" height="52">
+          <rect x="4" y="24" width="52" height="20" rx="3" fill="white"/>
+          <polygon points="8,24 12,10 42,10 54,24" fill="white"/>
+          <polygon points="14,24 17,12 38,12 42,24" fill="#4A8A22" opacity="0.5"/>
+          <circle cx="16" cy="44" r="6" fill="#2D4A1A" stroke="white" stroke-width="2"/>
+          <circle cx="16" cy="44" r="2.5" fill="white"/>
+          <circle cx="44" cy="44" r="6" fill="#2D4A1A" stroke="white" stroke-width="2"/>
+          <circle cx="44" cy="44" r="2.5" fill="white"/>
+        </svg>
+        <div style="position:absolute;top:4px;right:4px;width:18px;height:18px;background:#F5A623;border-radius:50%;font-size:10px;display:flex;align-items:center;justify-content:center;color:white;font-weight:700;">♥</div>
+      </div>
+      <div class="favicon-name">車両シルエット</div>
+      <div class="favicon-desc">バン型アイコン<br>サービス一目で分かる</div>
+    </div>
+    <div class="favicon-card">
+      <div class="fav-label">C</div>
+      <div style="width:64px;height:64px;background:#4A8A22;border-radius:10px;margin:0 auto 10px;position:relative;display:flex;align-items:center;justify-content:center;">
+        <span style="font-size:38px;font-weight:900;color:white;-webkit-text-stroke:4px #F5A623;paint-order:stroke fill;">ぴ</span>
+        <div style="position:absolute;top:4px;right:4px;width:16px;height:16px;background:#F5A623;border-radius:50%;font-size:9px;display:flex;align-items:center;justify-content:center;color:white;font-weight:700;">♥</div>
+      </div>
+      <div class="favicon-name">「ぴ」縁取り</div>
+      <div class="favicon-desc">オレンジ縁取り<br>はぴタクらしさ◎</div>
+    </div>
+    <div class="favicon-card">
+      <div class="fav-label">D</div>
+      <div style="width:64px;height:64px;background:#2D4A1A;border-radius:10px;margin:0 auto 10px;display:flex;align-items:center;justify-content:center;">
+        <span style="font-size:38px;font-weight:900;color:white;-webkit-text-stroke:3px #F5A623;paint-order:stroke fill;">は</span>
+      </div>
+      <div class="favicon-name">「は」ダーク</div>
+      <div class="favicon-desc">深緑地にオレンジ縁<br>高級感・存在感◎</div>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>
