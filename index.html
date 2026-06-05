@@ -47,13 +47,11 @@
     }
     .logo { display: flex; align-items: center; gap: 10px; }
     .logo-icon {
-      width: 46px; height: 46px;
-      background: linear-gradient(135deg, var(--primary), var(--primary-d));
-      border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 22px; flex-shrink: 0;
+      width: 56px; height: 56px;
+      flex-shrink: 0; display: flex; align-items: center; justify-content: center;
     }
-    .logo-text { font-size: 1.3rem; font-weight: 500; color: var(--primary-d); letter-spacing: 0.05em; font-family: 'Kiwi Maru', serif; }
+    .logo-icon img { width: 56px; height: 56px; object-fit: contain; display: block; }
+    .logo-text { font-size: 1.4rem; font-weight: 500; color: var(--primary-d); letter-spacing: 0.05em; font-family: 'Kiwi Maru', serif; }
     h2 { font-family: 'Kiwi Maru', serif; font-weight: 500; }
     .logo-name-jp { font-size: 0.7rem; color: var(--muted); display: block; font-weight: 400; }
     .logo-sub { font-size: 0.62rem; color: var(--muted); display: block; font-weight: 400; }
@@ -373,7 +371,7 @@
 <!-- HEADER -->
 <header>
   <div class="logo">
-    <div class="logo-icon">🚐</div>
+    <div class="logo-icon"><img src="logo.png" alt="はぴタク ロゴ"></div>
     <div>
       <div class="logo-text">はぴタク</div>
       <span class="logo-name-jp">介護福祉タクシー</span>
@@ -633,7 +631,7 @@
 
 <!-- FOOTER -->
 <footer>
-  <div class="footer-logo">🚐 介護福祉タクシー はぴタク</div>
+  <div class="footer-logo"><img src="logo-footer.png" alt="はぴタク" style="height:56px; object-fit:contain; vertical-align:middle;"></div>
   <div class="footer-address">代表：野村 優一　〒810-0021　筑紫野市下見353-3（西鉄筑紫駅近く）　TEL: 090-3603-4400</div>
   <div class="footer-links">
     <a href="#about">サービス概要</a>
