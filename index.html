@@ -181,7 +181,6 @@
       box-shadow: 0 3px 12px rgba(180,150,80,0.12);
       position: relative;
     }
-    /* 吹き出しの尻尾（下向き三角） */
     .worry-card::after {
       content: '';
       position: absolute; bottom: -14px; left: 50%; transform: translateX(-50%);
@@ -249,16 +248,6 @@
     .flow-icon { font-size: 2rem; margin-bottom: 10px; }
     .flow-step-h h3 { font-size: 0.97rem; font-weight: 700; margin-bottom: 8px; color: var(--primary-d); }
     .flow-step-h p { font-size: 0.82rem; color: #666; line-height: 1.7; text-align: left; }
-
-    /* ─── GALLERY ─── */
-    .gallery-grid {
-      display: grid; grid-template-columns: repeat(3, 1fr);
-      grid-template-rows: 200px 200px; gap: 14px; margin-top: 36px;
-    }
-    .gallery-item { border-radius: 14px; overflow: hidden; box-shadow: 0 4px 16px rgba(0,0,0,0.1); }
-    .gallery-item.large { grid-column: span 2; }
-    .gallery-item img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.4s; }
-    .gallery-item:hover img { transform: scale(1.05); }
 
     /* ─── PHOTO BREAK ─── */
     .photo-break { height: 260px; overflow: hidden; position: relative; }
@@ -341,7 +330,7 @@
     .sns-icon-link:hover { transform: translateY(-2px); background: rgba(255,255,255,0.28); }
     .sns-icon-link svg { width: 36px; height: 36px; flex-shrink: 0; }
 
-    /* ─── CONTENT FONT ×1.3 (こんなお悩み以下) ─── */
+    /* ─── CONTENT FONT ×1.3 ─── */
     .worry-card p { font-size: 1.17rem !important; }
     .worries-title { font-size: 1.95rem !important; }
     .worries-answer h3 { font-size: 1.82rem !important; }
@@ -386,9 +375,6 @@
       .worries-grid { grid-template-columns: 1fr; }
       .flow-steps-h { grid-template-columns: 1fr; }
       .flow-arrow { display: none; }
-      .gallery-grid { grid-template-columns: 1fr 1fr; grid-template-rows: auto; }
-      .gallery-item { height: 180px; }
-      .gallery-item.large { grid-column: span 2; }
       .contact-card { padding: 36px 20px; }
       .contact-info { flex-direction: column; align-items: center; }
       .contact-item { width: 100%; }
@@ -402,9 +388,6 @@
       .hero-catch { font-size: 0.82rem; }
       .section-wrap, .inner, .worries-inner { padding: 48px 16px; }
       h2 { font-size: 1.45rem; }
-      .gallery-grid { grid-template-columns: 1fr; grid-template-rows: auto; }
-      .gallery-item { height: 200px; }
-      .gallery-item.large { grid-column: span 1; }
       .photo-break { height: 210px; }
       .photo-break-text h3 { font-size: 1.2rem; }
       footer .footer-links { gap: 12px; font-size: 0.8rem; }
@@ -454,8 +437,7 @@
     <a href="#contact" class="btn-primary">📞 まずはお気軽にご相談ください</a>
   </div>
   <div class="hero-right">
-    <img src="TOP2.png"
-         alt="介護福祉タクシー はぴタク 車両">
+    <img src="TOP2.png" alt="介護福祉タクシー はぴタク 車両">
     <div class="hero-right-overlay"></div>
   </div>
 </div>
@@ -498,8 +480,7 @@
   <div class="divider"></div>
   <div class="about-grid">
     <div class="about-img">
-      <img src="https://images.unsplash.com/photo-1735728092177-0cfee62fce55?w=800&q=80"
-           alt="はぴタク 介護サービスイメージ">
+      <img src="https://images.unsplash.com/photo-1735728092177-0cfee62fce55?w=800&q=80" alt="はぴタク 介護サービスイメージ">
     </div>
     <div class="about-text">
       <p>介護福祉タクシー はぴタクは、車いすをご利用の方など、一般の交通機関の利用が難しい方を対象とした移送サービスです。</p>
@@ -585,8 +566,7 @@
 
 <!-- PHOTO BREAK -->
 <div class="photo-break">
-  <img src="https://images.unsplash.com/photo-1765692089840-97414f5b74fe?w=1600&q=80"
-       alt="京都 哲学の道 桜並木">
+  <img src="https://images.unsplash.com/photo-1765692089840-97414f5b74fe?w=1600&q=80" alt="京都 哲学の道 桜並木">
   <div class="photo-break-text">
     <h3>どんなことでも、まずはお気軽にご相談ください。</h3>
     <p>はぴタクがあなたの「行きたい」を全力でサポートします</p>
@@ -598,7 +578,6 @@
   <div class="section-label">Price</div>
   <h2>料金表</h2>
   <div class="divider"></div>
-
   <div class="price-main">
     <div class="price-row">
       <div class="price-row-label">距離制運賃</div>
@@ -619,13 +598,11 @@
       </div>
     </div>
   </div>
-
   <div class="price-options">
     <div class="price-option">🌙 深夜早朝（22時〜5時） <strong>2割増</strong></div>
     <div class="price-option">🚗 遠距離割引（9,000円以上） <strong>1割引</strong></div>
     <div class="price-option">♿ 各種障害者手帳をお持ちの方 <strong>1割引</strong></div>
   </div>
-
   <div class="price-notes">
     <p>※ 介護保険はご利用いただけません</p>
     <p>※ 付き添いの方も同乗可能（2名まで）</p>
@@ -657,24 +634,18 @@
           <div class="label">📍 所在地</div>
           <div class="value" style="font-size:0.9rem;">筑紫野市下見353-3</div>
           <div style="font-size:0.72rem; opacity:0.8; margin-top:4px;">西鉄筑紫駅近く</div>
-          <a href="https://www.google.com/maps/place/%E3%80%92810-0021+%E7%A6%8F%E5%B2%A1%E7%9C%8C%E7%AD%91%E7%B4%AB%E9%87%8E%E5%B8%82%E4%B8%8B%E8%A6%8B%EF%BC%93%EF%BC%95%EF%BC%93/@33.4656876,130.5538382,17z/data=!3m1!4b1!4m6!3m5!1s0x35419eb387a9a26d:0xce980ec31ca855ef!8m2!3d33.4656876!4d130.5564131!16s%2Fg%2F11c1jd_y95?entry=ttu&g_ep=EgoyMDI2MDYwMS4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:6px;margin-top:10px;color:#fff;text-decoration:none;opacity:0.9;font-size:0.82rem;font-weight:700;transition:opacity 0.2s;" onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=0.9">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" width="28" height="28"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
-            Googleマップで見る
-          </a>
         </div>
       </div>
       <a href="tel:090-3603-4400" class="btn-white">📞 090-3603-4400 に電話する</a>
       <div class="sns-section">
         <div class="sns-label">こちらからお問い合わせも</div>
         <div class="sns-icons">
-          <!-- LINE -->
           <a href="https://lin.ee/uNVUMtk" target="_blank" rel="noopener" class="sns-icon-link">
             <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="white">
               <path d="M19.365 9.863c.349 0 .63.285.63.631 0 .345-.281.63-.63.63H17.61v1.125h1.755c.349 0 .63.283.63.63 0 .344-.281.629-.63.629h-2.386c-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.627-.63h2.386c.349 0 .63.285.63.63 0 .349-.281.63-.63.63H17.61v1.125h1.755zm-3.855 3.016c0 .27-.174.51-.432.596-.064.021-.133.031-.199.031-.211 0-.391-.09-.51-.25l-2.443-3.317v2.94c0 .344-.279.629-.631.629-.346 0-.626-.285-.626-.629V8.108c0-.27.173-.51.43-.595.06-.023.136-.033.194-.033.195 0 .375.104.495.254l2.462 3.33V8.108c0-.345.282-.63.63-.63.345 0 .63.285.63.63v4.771zm-5.741 0c0 .344-.282.629-.631.629-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.627-.63.349 0 .631.285.631.63v4.771zm-2.466.629H4.917c-.345 0-.63-.285-.63-.629V8.108c0-.345.285-.63.63-.63.348 0 .63.285.63.63v4.141h1.756c.348 0 .629.283.629.63 0 .344-.281.629-.629.629M24 10.314C24 4.943 18.615.572 12 .572S0 4.943 0 10.314c0 5.016 4.434 9.22 10.436 10.012.406.089.959.272 1.099.626.125.316.083.811.038 1.13l-.164 1.028c-.045.326-.27 1.287 1.12.701 1.389-.587 7.496-4.41 10.228-7.548C23.234 14.454 24 12.479 24 10.314"/>
             </svg>
             LINE
           </a>
-          <!-- Instagram -->
           <a href="https://www.instagram.com/hapihapitaku/?hl=ja" target="_blank" rel="noopener" class="sns-icon-link">
             <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="white">
               <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
@@ -724,8 +695,6 @@
     hamburger.classList.remove('open');
     navMobile.classList.remove('open');
   }
-
-  // QRコード生成
   (function() {
     const script = document.createElement('script');
     script.src = 'https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js';
@@ -733,17 +702,13 @@
       const url = window.location.origin + window.location.pathname;
       document.getElementById('qr-url').textContent = url;
       new QRCode(document.getElementById('qrcode'), {
-        text: url,
-        width: 180, height: 180,
-        colorDark: '#4A8A22',
-        colorLight: '#ffffff',
+        text: url, width: 180, height: 180,
+        colorDark: '#4A8A22', colorLight: '#ffffff',
         correctLevel: QRCode.CorrectLevel.M
       });
     };
     document.head.appendChild(script);
   })();
-
-  // スムーズスクロール
   document.querySelectorAll('a[href^="#"]').forEach(a => {
     a.addEventListener('click', e => {
       const target = document.querySelector(a.getAttribute('href'));
